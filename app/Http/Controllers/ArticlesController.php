@@ -6,6 +6,7 @@ use App\Http\Requests\ArticleRequest;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Tag;
+use App\Services\TagsSynchronizer;
 
 class ArticlesController extends Controller
 {
@@ -30,12 +31,16 @@ class ArticlesController extends Controller
         return view('articles.create', compact('article'));
     }
 
-    public function store(ArticleRequest $articleRequest)
+    public function store(ArticleRequest $articleRequest, TagsSynchronizer $tagsSynchronizer)
     {
         $validated = $articleRequest->validated();
         $validated['created_at'] = (request()->get('published') === 'on' ? time() : null);
 
-        Article::create($validated);
+        $article = Article::create($validated);
+
+        $tags = $articleRequest->getTags();
+        $tagsSynchronizer->sync($tags, $article);
+
         return redirect(route('articles.index'))->with('status', 'Article saved!');
     }
 
@@ -44,12 +49,16 @@ class ArticlesController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    public function update(Article $article, ArticleRequest $articleRequest)
+    public function update(Article $article, ArticleRequest $articleRequest, TagsSynchronizer $tagsSynchronizer)
     {
         $validated = $articleRequest->validated();
         $validated['created_at'] = (request()->get('published') === 'on' ? time() : null);
 
         $article->update($validated);
+
+        $tags = $articleRequest->getTags();
+        $tagsSynchronizer->sync($tags, $article);
+
         return redirect(route('articles.index'))->with('status', 'Article changed!');
     }
 

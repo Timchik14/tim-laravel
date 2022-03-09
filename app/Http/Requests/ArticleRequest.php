@@ -29,4 +29,12 @@ class ArticleRequest extends FormRequest
         }
         return $rules;
     }
+
+    public function getTags()
+    {
+        $tags = collect(explode(',', request('tags')))->keyBy(function ($item) {
+            return $item;
+        });
+        return $tags;
+    }
 }
