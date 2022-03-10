@@ -1,12 +1,12 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Создать статью')
 @section('content')
     <div class="col-md-8 blog-main">
         <h3 class="pb-3 mb-4 font-italic border-bottom">
-            Create article
+            Edit article
         </h3>
 
-        @include('layout.errors')
+        @include('layouts.errors')
 
         <form method="post" action="{{ route('articles.show', ['article' => $article->slug]) }}">
             @method('PATCH')

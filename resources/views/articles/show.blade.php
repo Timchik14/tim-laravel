@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Страница статьи')
 @section('content')
     <div class="col-md-8 blog-main">
@@ -7,7 +7,11 @@
         </h3>
         <div class="blog-post">
             <h2 class="blog-post-title">{{ $article->name }}</h2>
-            <p><a href=" {{ route('articles.edit', ['article' => $article->slug]) }}">Редактировать</a></p>
+
+            @can('update', $article)
+                <p><a href=" {{ route('articles.edit', ['article' => $article->slug]) }}">Редактировать</a></p>
+            @endcan
+
             <p class="blog-post-meta">{{ $article->created_at->toFormattedDateString() }}</p>
             <p>{{ $article->short_description }}</p>
             <hr>

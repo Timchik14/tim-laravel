@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Создать статью')
 @section('content')
     <div class="col-md-8 blog-main">
@@ -6,7 +6,7 @@
             Create article
         </h3>
 
-        @include('layout.errors')
+        @include('layouts.errors')
 
         <form method="post" action="{{ route('articles.store') }}">
             @include('articles.create_edit_form')
