@@ -10,6 +10,6 @@ class TagsController extends Controller
     public function index (Tag $tag)
     {
         $articles = $tag->articles()->with('tags')->get();
-        return view('index', compact('articles'));
+        return view('articles.index', compact('articles'));
     }
 }

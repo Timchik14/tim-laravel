@@ -13,7 +13,7 @@ class ArticlesController extends Controller
     public function index()
     {
         $articles = Article::with('tags')->latest()->published()->get();
-        return view('index', compact('articles'));
+        return view('articles.index', compact('articles'));
     }
 
     public function about()
