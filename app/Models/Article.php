@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Events\ArticleCreated;
+
 class Article extends Model
 {
     public function scopePublished($query)

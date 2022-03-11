@@ -9,10 +9,10 @@
             <h2 class="blog-post-title">{{ $article->name }}</h2>
 
             @can('update', $article)
-                <p><a href=" {{ route('articles.edit', ['article' => $article->slug]) }}">Редактировать</a></p>
+                <p><a href=" {{ route('articles.edit', ['article' => $article]) }}">Редактировать</a></p>
             @endcan
 
-            <p class="blog-post-meta">{{ $article->created_at->toFormattedDateString() }}</p>
+            <p class="blog-post-meta">{{ $article->created_at ? $article->created_at->toFormattedDateString() : '' }}</p>
             <p>{{ $article->short_description }}</p>
             <hr>
             <p>{{ $article->long_description  }}</p>

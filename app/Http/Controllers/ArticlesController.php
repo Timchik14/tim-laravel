@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ArticleCreated;
+use App\Notifications\ArticleUpdated;
+use App\Notifications\ArticleDeleted;
 use App\Http\Requests\ArticleRequest;
-use Illuminate\Http\Request;
 use App\Models\Article;
-use App\Models\Tag;
 use App\Services\TagsSynchronizer;
 
 class ArticlesController extends Controller
@@ -48,6 +49,8 @@ class ArticlesController extends Controller
         $tags = $articleRequest->getTags();
         $tagsSynchronizer->sync($tags, $article);
 
+        auth()->user()->notify(new ArticleCreated($article));
+
         return redirect(route('articles.index'))->with('status', 'Article saved!');
     }
 
@@ -68,12 +71,17 @@ class ArticlesController extends Controller
         $tags = $articleRequest->getTags();
         $tagsSynchronizer->sync($tags, $article);
 
+        auth()->user()->notify(new ArticleUpdated($article));
+
         return redirect(route('articles.index'))->with('status', 'Article changed!');
     }
 
     public function destroy(Article $article)
     {
         $article->delete();
+
+        auth()->user()->notify(new ArticleDeleted($article));
+
         return redirect(route('articles.index'))->with('status', 'Article deleted!');
     }
 }

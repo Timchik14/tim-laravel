@@ -8,12 +8,12 @@
 
         @include('layouts.errors')
 
-        <form method="post" action="{{ route('articles.show', ['article' => $article->slug]) }}">
+        <form method="post" action="{{ route('articles.show', ['article' => $article]) }}">
             @method('PATCH')
             @include('articles.create_edit_form')
         </form>
         <br>
-        <form method="post" action="{{ route('articles.show', ['article' => $article->slug]) }}">
+        <form method="post" action="{{ route('articles.show', ['article' => $article]) }}">
             @csrf
             @method('DELETE')
             <button type="submit" class="btn btn-danger">Удалить</button>
