@@ -7,4 +7,4 @@
     </script>
 @endif
 
-@include('layout.modal')
+@include('layouts.modal')

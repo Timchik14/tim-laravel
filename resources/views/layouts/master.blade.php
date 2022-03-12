@@ -20,7 +20,7 @@
 
 <body>
 
-    @include('layout.nav')
+    @include('layouts.nav')
 
     <main role="main" class="container">
 
@@ -28,13 +28,15 @@
 
             @yield('content')
 
-            @include('layout.sidebar')
+            @section('sidebar')
+                @include('layouts.sidebar')
+            @show
 
         </div>
 
     </main>
 
-@include('layout.footer')
+@include('layouts.footer')
 
 </body>
 </html>

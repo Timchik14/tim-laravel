@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layouts.master')
 @section('title', 'Административный раздел')
 @section('content')
     <div class="col-md-8 blog-main">

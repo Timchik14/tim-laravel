@@ -14,3 +14,5 @@ Route::resource('/articles', ArticlesController::class);
 Route::get('/contacts', [FeedbacksController::class, 'create'])->name('contacts');
 Route::post('/contacts', [FeedbacksController::class, 'store']);
 Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])->name('admin.feedbacks');
+
+Auth::routes();
