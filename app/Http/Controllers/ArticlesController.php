@@ -19,7 +19,8 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        $articles = auth()->user()->articles()->with('tags')->latest()->published()->get();
+        $articles = auth()->user()->articles()->with('tags')->latest()->get();
+//        $articles = Article::with('tags')->latest()->get(); // если админ
         return view('articles.index', compact('articles'));
     }
 
