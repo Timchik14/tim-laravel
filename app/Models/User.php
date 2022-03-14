@@ -30,4 +30,30 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class, 'owner_id');
     }
+
+    // return user to role relations
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // check user is admin, user or guest
+    public function hasRole($role)
+    {
+        if ($this->roles->contains('slug', $role)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function giveRoles($roles)
+    {
+        $roles = Role::whereIn('slug', $roles)->get();
+        if($roles === null) {
+            return $this;
+        }
+
+        $this->roles()->saveMany($roles);
+        return $this;
+    }
 }
