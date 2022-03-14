@@ -14,12 +14,12 @@ class ArticlesController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except('about');
+//        $this->middleware('auth')->except('about');
     }
 
     public function index()
     {
-        $articles = auth()->user()->articles()->with('tags')->latest()->published()->get();
+        $articles = Article::with('tags')->latest()->published()->get();
         return view('articles.index', compact('articles'));
     }
 

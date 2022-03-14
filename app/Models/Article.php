@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use App\Events\ArticleCreated;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Article extends Model
 {
+    use HasFactory;
+
     public function scopePublished($query)
     {
         return $query->where('created_at', '!=', null);

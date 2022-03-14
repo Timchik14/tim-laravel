@@ -5,7 +5,7 @@ use App\Http\Controllers\FeedbacksController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagsController;
 
-Route::get('/posts/tags/{tag}', [TagsController::class, 'index'])->name('tags');
+Route::get('/articles/tags/{tag}', [TagsController::class, 'index'])->name('tags');
 Route::get('/about', [ArticlesController::class, 'about'])->name('about');
 
 Route::view('/', 'index')->name('main');
