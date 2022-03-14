@@ -8,14 +8,15 @@
         <div class="blog-post">
             <h2 class="blog-post-title">{{ $article->name }}</h2>
 
+            @can('update', $article)
+                <p><a href=" {{ route('articles.edit', ['article' => $article]) }}">Редактировать</a></p>
+            @endcan
 
             <?php if (auth()->user()) { ?>
 
                 <?php if (auth()->user()->isAdmin()) { ?>
 
-                        @admin
                             <p><a href=" {{ route('admin.edit', ['article' => $article]) }}">Редактировать</a></p>
-                        @endadmin
 
                 <?php } else { ?>
 
