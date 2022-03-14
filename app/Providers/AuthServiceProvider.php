@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
+use Illuminate\Contracts\Auth\Access\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -12,8 +12,16 @@ class AuthServiceProvider extends ServiceProvider
          'App\Models\Article' => 'App\Policies\ArticlePolicy',
     ];
 
-    public function boot()
+    public function boot(Gate $gate)
     {
         $this->registerPolicies();
+
+        $gate->before(function ($user) {
+            if ($user->isAdmin()) {
+                return true;
+            }
+            return false;
+        });
+
     }
 }

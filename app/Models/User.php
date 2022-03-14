@@ -38,9 +38,17 @@ class User extends Authenticatable
     }
 
     // check user is admin, user or guest
-    public function hasRole($role)
+    private function hasRole($role)
     {
         if ($this->roles->contains('slug', $role)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isAdmin()
+    {
+        if ($this->hasRole('admin')) {
             return true;
         }
         return false;
@@ -49,7 +57,7 @@ class User extends Authenticatable
     public function giveRoles($roles)
     {
         $roles = Role::whereIn('slug', $roles)->get();
-        if($roles === null) {
+        if ($roles === null) {
             return $this;
         }
 

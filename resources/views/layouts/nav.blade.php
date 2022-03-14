@@ -47,7 +47,9 @@
             <a class="p-2 text-muted" href="{{ route('articles.create') }}">Создать статью</a>
             <a class="p-2 text-muted" href="{{ route('about') }}">О нас</a>
             <a class="p-2 text-muted" href="{{ route('contacts') }}">Контакты</a>
-            <a class="p-2 text-muted" href="{{ route('admin') }}">Административный раздел</a>
+            @admin
+                <a class="p-2 text-muted" href="{{ route('admin') }}">Административный раздел</a>
+            @endadmin
         </nav>
     </div>
 </div>

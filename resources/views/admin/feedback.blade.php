@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.without_sidebar')
 @section('title', 'Административный раздел')
 @section('content')
     <div class="col-md-8 blog-main">

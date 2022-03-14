@@ -8,9 +8,23 @@
         <div class="blog-post">
             <h2 class="blog-post-title">{{ $article->name }}</h2>
 
-            @can('update', $article)
-                <p><a href=" {{ route('articles.edit', ['article' => $article]) }}">Редактировать</a></p>
-            @endcan
+
+            <?php if (auth()->user()) { ?>
+
+                <?php if (auth()->user()->isAdmin()) { ?>
+
+                        @admin
+                            <p><a href=" {{ route('admin.edit', ['article' => $article]) }}">Редактировать</a></p>
+                        @endadmin
+
+                <?php } else { ?>
+
+                        @can('update', $article)
+                            <p><a href=" {{ route('articles.edit', ['article' => $article]) }}">Редактировать</a></p>
+                        @endcan
+
+            <?php }} ?>
+
 
             <p class="blog-post-meta">{{ $article->created_at ? $article->created_at->toFormattedDateString() : '' }}</p>
             <p>{{ $article->short_description }}</p>

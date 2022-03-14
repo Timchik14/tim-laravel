@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::directive('admin', function () {
+            return '<?php if (auth()->user()) {
+                                if (auth()->user()->isAdmin()) { ?>';
+        });
+        Blade::directive('endadmin', function () {
+            return '<?php }} ?>';
+        });
     }
 }

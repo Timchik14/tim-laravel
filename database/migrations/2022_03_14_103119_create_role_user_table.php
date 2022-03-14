@@ -18,8 +18,10 @@ class CreateRoleUserTable extends Migration
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->primary(['user_id','role_id']);
         });
-        // give admin role to admin user
+
+        /* give admin role to default admin
         // first() возвращает экземпляр, а не коллекцию
+        */
         User::where('email', env('ADMIN_EMAIL'))->first()->giveRoles(['admin']);
     }
 
