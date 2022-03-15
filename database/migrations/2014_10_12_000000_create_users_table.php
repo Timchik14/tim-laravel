@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration
         User::create(
                     ['name' => 'Administrator',
                     'email' => config('app.adminEmail'),
-                    'password' => Hash::make('app.adminPassword')
+                    'password' => Hash::make(config('app.adminPassword'))
             ]);
     }
 
