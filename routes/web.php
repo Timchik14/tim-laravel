@@ -16,12 +16,11 @@ Route::resource('/articles', ArticlesController::class);
 
 Route::get('/contacts', [FeedbacksController::class, 'create'])->name('contacts');
 Route::post('/contacts', [FeedbacksController::class, 'store']);
+Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])->name('admin.feedbacks')->middleware('admin');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/articles', [AdminController::class, 'showArticles'])->name('admin.articles');
 Route::get('/admin/articles/{article}/', [AdminController::class, 'show'])->name('admin.article');
 Route::get('/admin/articles/{article}/edit', [AdminController::class, 'edit'])->name('admin.edit');
-Route::get('/admin/feedbacks', [AdminController::class, 'showFeedbacks'])->name('admin.feedbacks');
-
 
 Auth::routes();

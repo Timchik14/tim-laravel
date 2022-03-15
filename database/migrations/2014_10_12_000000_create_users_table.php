@@ -28,8 +28,8 @@ class CreateUsersTable extends Migration
         // default admin creation
         User::create(
                     ['name' => 'Administrator',
-                    'email' => env('ADMIN_EMAIL'),
-                    'password' => Hash::make(env('ADMIN_PASSWORD'))
+                    'email' => config('app.adminEmail'),
+                    'password' => Hash::make('app.adminPassword')
             ]);
     }
 

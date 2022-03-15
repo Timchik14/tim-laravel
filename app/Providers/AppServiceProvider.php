@@ -27,12 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('admin', function () {
-            return '<?php if (auth()->user()) {
-                                if (auth()->user()->isAdmin()) { ?>';
+        Blade::if('admin', function () {
+            return auth()->user() ? auth()->user()->isAdmin() : false;
         });
-        Blade::directive('endadmin', function () {
-            return '<?php }} ?>';
+        Blade::if('notadmin', function () {
+            return auth()->user() ? (!auth()->user()->isAdmin()) : true;
         });
     }
 }

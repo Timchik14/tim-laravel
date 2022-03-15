@@ -20,4 +20,10 @@ class FeedbacksController extends Controller
         Message::create(request()->all());
         return redirect(route('contacts'))->with('status', 'Message sent!');
     }
+
+    public function show()
+    {
+        $messages = Message::latest()->get();
+        return view('admin.feedback', compact('messages'));
+    }
 }
