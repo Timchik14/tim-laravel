@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.without_sidebar')
 @section('title', 'Контакты')
 @section('content')
     <div class="col-md-8 blog-main">
@@ -6,7 +6,7 @@
             Contacts
         </h3>
 
-        @include('layouts.errors')
+        @include('layouts.modal')
 
         <form method="post" action="{{ route('contacts') }}">
 

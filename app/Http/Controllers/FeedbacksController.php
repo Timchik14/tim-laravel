@@ -17,9 +17,8 @@ class FeedbacksController extends Controller
             'email' => 'required|email:rfc,dns',
             'message' => 'required',
         ]);
-
         Message::create(request()->all());
-        return redirect(route('admin.feedbacks'));
+        return redirect(route('contacts'))->with('status', 'Message sent!');
     }
 
     public function show()

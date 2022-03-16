@@ -6,6 +6,10 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Main page
         </h3>
+<?php echo config('env'); ?>
+        @foreach($articles as $article)
+            @include('articles.article')
+        @endforeach
 
         <nav class="blog-pagination">
             <a class="btn btn-outline-primary" href="#">Older</a>
