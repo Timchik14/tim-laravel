@@ -233,7 +233,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
-    
+
     'adminEmail' => env('ADMIN_EMAIL'),
 
     'adminPassword' => env('ADMIN_PASSWORD'),
