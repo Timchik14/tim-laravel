@@ -7,6 +7,7 @@ use App\Notifications\ArticleUpdated;
 use App\Notifications\ArticleDeleted;
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use App\Service\Pushall;
 use App\Services\TagsSynchronizer;
 
 class ArticlesController extends Controller
@@ -38,7 +39,7 @@ class ArticlesController extends Controller
         return view('articles.create', compact('article'));
     }
 
-    public function store(ArticleRequest $articleRequest, TagsSynchronizer $tagsSynchronizer)
+    public function store(ArticleRequest $articleRequest, TagsSynchronizer $tagsSynchronizer, Pushall $pushall)
     {
         $validated = $articleRequest->validated();
         $validated['created_at'] = (request()->get('published') === 'on' ? time() : null);
@@ -49,7 +50,9 @@ class ArticlesController extends Controller
         $tags = $articleRequest->getTags();
         $tagsSynchronizer->sync($tags, $article);
 
+
         auth()->user()->notify(new ArticleCreated($article));
+        $pushall->send('Article created', $article->name);
 
         return redirect(route('articles.index'))->with('status', 'Article saved!');
     }
