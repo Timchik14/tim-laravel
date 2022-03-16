@@ -11,8 +11,17 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $tags = Tag::factory()->count(5)->create();
-
-        Article::factory()->count(5)->create();
+        Tag::factory()->count(5)->create();
+        User::factory()
+            ->count(2)
+            ->create()
+            ->each(function (User $user) {
+                $user->articles()->saveMany(Article::factory()
+                    ->count(10)
+                    ->make());
+            });
+        Article::all()->each(function (Article $article) {
+            $article->tags()->attach(Tag::all()->random(3));
+        });
     }
 }

@@ -11,7 +11,7 @@ class ArticleFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'owner_id' => User::factory(),
+            'owner_id' => 0,
             'slug' => $this->faker->word,
             'short_description' => $this->faker->words(3, true),
             'long_description' => $this->faker->words(5, true),
