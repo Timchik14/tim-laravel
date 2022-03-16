@@ -3,15 +3,6 @@
 @section('content')
     <div class="col-md-8 blog-main">
 
-        @if (session('status'))
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const modal = new bootstrap.Modal(document.querySelector('#modal'));
-                    modal.show();
-                })
-            </script>
-        @endif
-
         @include('layouts.modal')
 
         <h3 class="pb-3 mb-4 font-italic border-bottom">

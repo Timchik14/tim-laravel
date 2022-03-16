@@ -1,3 +1,12 @@
+@if (session('status'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = new bootstrap.Modal(document.querySelector('#modal'));
+            modal.show();
+        })
+    </script>
+@endif
+
 <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Blade::if('admin', function () {
+            return auth()->user() ? auth()->user()->isAdmin() : false;
+        });
+        Blade::if('notadmin', function () {
+            return auth()->user() ? (!auth()->user()->isAdmin()) : true;
+        });
     }
 }
