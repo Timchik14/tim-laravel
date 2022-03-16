@@ -27,12 +27,15 @@ class Mailing extends Notification
 
     public function toMail($notifiable)
     {
+        foreach ($this->articles as $article) {
+            $articlesNames[] = $article['name'];
+        }
+
         return (new MailMessage)
             ->subject('New articles')
-            ->line('created.')
-            ->action('To article', url('/'))
-            ->lines([1, 2])
-            ;
+            ->line('New articles of the week ')
+            ->lines($articlesNames);
+
     }
 
     public function toArray($notifiable)

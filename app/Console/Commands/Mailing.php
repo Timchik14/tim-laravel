@@ -24,7 +24,7 @@ class Mailing extends Command
         $articles = Article::whereDay('created_at', '>', date('d') - $days)->get();
         $users = User::all();
         foreach ($users as $user) {
-            $user->notify(new \App\Notifications\Mailing($days, $articles));
+            $user->notify(new \App\Notifications\Mailing($articles, $days));
         }
     }
 }
