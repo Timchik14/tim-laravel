@@ -20,7 +20,6 @@ class Mailing extends Command
     public function handle()
     {
         $days = $this->argument('days');
-        $this->info($days);
         $articles = Article::whereDay('created_at', '>', date('d') - $days)->get();
         $users = User::all();
         foreach ($users as $user) {
