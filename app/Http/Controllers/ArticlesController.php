@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Notifications\ArticleCreated;
 use App\Notifications\ArticleUpdated;
 use App\Notifications\ArticleDeleted;
@@ -31,6 +32,7 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
+        $article = $article->load('comments');
         return view('articles.show', compact('article'));
     }
 
@@ -77,6 +79,17 @@ class ArticlesController extends Controller
         auth()->user()->notify(new ArticleUpdated($article));
 
         return redirect(route('articles.index'))->with('status', 'Article changed!');
+    }
+
+    public function comment(Article $article)
+    {
+        $comment = $this->validate(request(), [
+            'text' => 'required',
+        ]);
+        $comment['user_id'] = auth()->id();
+        $comment['article_id'] = $article->id; //не подгружается зависимость
+        Comment::create($comment);
+        return back()->with('status', 'Comment created!');
     }
 
     public function destroy(Article $article)

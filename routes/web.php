@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CommentsController;
 
 Route::get('/articles/tags/{tag}', [TagsController::class, 'index'])->name('tags');
 Route::get('/about', [ArticlesController::class, 'about'])->name('about');
@@ -17,6 +18,8 @@ Route::resource('/articles', ArticlesController::class);
 Route::get('/contacts', [FeedbacksController::class, 'create'])->name('contacts');
 Route::post('/contacts', [FeedbacksController::class, 'store']);
 Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])->name('admin.feedbacks')->middleware('admin');
+
+Route::post('/comments', [ArticlesController::class, 'comment'])->name('comments');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/articles', [AdminController::class, 'showArticles'])->name('admin.articles');

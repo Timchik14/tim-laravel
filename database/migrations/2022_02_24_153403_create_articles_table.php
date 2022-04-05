@@ -14,7 +14,7 @@ class CreateArticlesTable extends Migration
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->unsignedInteger('owner_id');
             $table->string('slug');
             $table->string('name');
@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
             $table->string('long_description');
             $table->text('body');
             $table->timestamps();
+            $table->softDeletes();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
