@@ -21,7 +21,7 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        $articles = auth()->user()->articles()->with('tags')->latest()->get();
+        $articles = auth()->user()->articles()->with('tags')->latest()->simplePaginate(10);
         return view('articles.index', compact('articles'));
     }
 

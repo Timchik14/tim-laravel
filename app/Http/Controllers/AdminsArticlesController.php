@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 
-class AdminController extends Controller
+class AdminsArticlesController extends Controller
 {
     public function __construct()
     {
@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     public function showArticles()
     {
-        $articles = Article::with('tags')->latest()->get();
+        $articles = Article::with('tags')->latest()->simplePaginate(20);
         return view('articles.index', compact('articles'));
     }
 
