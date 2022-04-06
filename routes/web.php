@@ -19,7 +19,7 @@ Route::get('/contacts', [FeedbacksController::class, 'create'])->name('contacts'
 Route::post('/contacts', [FeedbacksController::class, 'store']);
 Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])->name('admin.feedbacks')->middleware('admin');
 
-Route::post('/comments', [ArticlesController::class, 'comment'])->name('comments');
+Route::post('/comments/{article}/', [ArticlesController::class, 'comment'])->name('comments');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/articles', [AdminController::class, 'showArticles'])->name('admin.articles');

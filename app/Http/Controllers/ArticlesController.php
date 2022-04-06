@@ -32,7 +32,9 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
-        $article = $article->load('comments');
+        $article = $article->load(['comments' => function ($query) {
+            $query->orderByDesc('created_at');
+    }]);
         return view('articles.show', compact('article'));
     }
 
@@ -87,7 +89,7 @@ class ArticlesController extends Controller
             'text' => 'required',
         ]);
         $comment['user_id'] = auth()->id();
-        $comment['article_id'] = $article->id; //не подгружается зависимость
+        $comment['article_id'] = $article->id;
         Comment::create($comment);
         return back()->with('status', 'Comment created!');
     }
