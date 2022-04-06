@@ -10,12 +10,11 @@
 
                 @admin
                     <p><a href=" {{ route('admin.edit', ['article' => $article]) }}">Редактировать</a></p>
-                @endadmin
-                @notadmin
+                @else
                     @can('update', $article)
                         <p><a href=" {{ route('articles.edit', ['article' => $article]) }}">Редактировать</a></p>
                     @endcan
-                @endnotadmin
+                @endadmin
 
             <p class="blog-post-meta">{{ $article->created_at ? $article->created_at->toFormattedDateString() : '' }}</p>
             <p>{{ $article->short_description }}</p>
@@ -23,6 +22,25 @@
             <p>{{ $article->long_description  }}</p>
             <hr>
             <p>{{ $article->body }}</p>
+            <hr>
+
+            @forelse($article->history as $item)
+                <p>{{$item->email}} <b>changed field(s):</b> {{$item->pivot->changes}} <b>at</b> {{$item->pivot->created_at}}</p>
+            @empty
+                <p>No changes</p>
+            @endforelse
+
+            <hr>
+
+            <p>Комментарии</p>
+            @auth()
+                @include('layouts.errors')
+                @include('comments.create')
+            @endauth
+            <br>
+            @foreach($article->comments as $comment)
+                @include('comments.comment')
+            @endforeach
             <hr>
             <p><a href="{{ route('articles.index') }}">К статьям</a></p>
 
