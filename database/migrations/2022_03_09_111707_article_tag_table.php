@@ -6,27 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class ArticleTagTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('article_tag', function (Blueprint $table) {
-            $table->unsignedInteger('article_id');
+        Schema::create('taggables', function (Blueprint $table) {
             $table->unsignedInteger('tag_id');
-            $table->primary(['tag_id', 'article_id']);
-            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
+            $table->morphs('taggable');
+            $table->primary(['tag_id', 'taggable_id', 'taggable_type']);
             $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         //

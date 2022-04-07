@@ -29,4 +29,5 @@
     <input type="checkbox" class="form-check-input" id="published" name="published" {{ $article->created_at ? 'checked' : '' }}>
     <label class="form-check-label" for="published">Опубликовать</label>
 </div>
+
 <button type="submit" class="btn btn-primary">Принять</button>

@@ -22,4 +22,9 @@ class Tiding extends Model
     {
         return $this->belongsTo(User::class, 'owner_id');
     }
+
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
 }
