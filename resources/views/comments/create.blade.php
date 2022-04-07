@@ -1,4 +1,4 @@
-<form method="post" action="{{ route('comments', ['article' => $article]) }}">
+<form method="post" action="{{ route('article.comments', ['article' => $article]) }}">
 
     @csrf
 

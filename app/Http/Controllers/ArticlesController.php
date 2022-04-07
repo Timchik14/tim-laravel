@@ -35,6 +35,7 @@ class ArticlesController extends Controller
         $article = $article->load(['comments' => function ($query) {
             $query->orderByDesc('created_at');
     }]);
+//        dd($article->comments());
         return view('articles.show', compact('article'));
     }
 
@@ -85,12 +86,11 @@ class ArticlesController extends Controller
 
     public function comment(Article $article)
     {
-        $comment = $this->validate(request(), [
+        $text = $this->validate(request(), [
             'text' => 'required',
         ]);
-        $comment['user_id'] = auth()->id();
-        $comment['article_id'] = $article->id;
-        Comment::create($comment);
+        $comment = new Comment($text);
+        $article->comments()->save($comment);
         return back()->with('status', 'Comment created!');
     }
 

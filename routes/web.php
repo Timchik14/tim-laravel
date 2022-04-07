@@ -23,7 +23,8 @@ Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])
     ->name('admin.feedbacks')
     ->middleware('admin');
 
-Route::post('/comments/{article}/', [ArticlesController::class, 'comment'])->name('comments');
+Route::post('/comments/{article}/', [ArticlesController::class, 'comment'])->name('article.comments');
+Route::post('/comments/{tiding}/', [TidingsController::class, 'comment'])->name('tiding.comments');
 
 Route::get('/admin', [AdminsArticlesController::class, 'index'])->name('admin');
 
