@@ -68,7 +68,7 @@ class ArticlesController extends Controller
         return view('articles.edit', compact('article'));
     }
 
-    public function update(Article $article, ArticleRequest $articleRequest, TagsSynchronizer $articleTagsSynchronizer)
+    public function update(Article $article, ArticleRequest $articleRequest, TagsSynchronizer $tagsSynchronizer)
     {
         $validated = $articleRequest->validated();
         $validated['created_at'] = (request()->get('published') === 'on' ? time() : null);
@@ -76,7 +76,7 @@ class ArticlesController extends Controller
         $article->update($validated);
 
         $tags = $articleRequest->getTags();
-        $articleTagsSynchronizer->sync($tags, $article);
+        $tagsSynchronizer->sync($tags, $article);
 
         auth()->user()->notify(new ArticleUpdated($article));
 
