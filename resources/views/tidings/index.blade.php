@@ -1,19 +1,19 @@
 @extends('layouts.master')
-@section('title', 'Статьи')
+@section('title', 'Новости')
 @section('content')
     <div class="col-md-8 blog-main">
 
         @include('layouts.modal')
 
         <h3 class="pb-3 mb-4 font-italic border-bottom">
-            All articles
+            All news
         </h3>
 
-        @foreach($articles as $article)
-            @include('articles.article')
+        @foreach($tidings as $tiding)
+            @include('tidings.tiding')
         @endforeach
 
-        {{ $articles->links() }}
+        {{ $tidings->links() }}
 
     </div>
 @endsection

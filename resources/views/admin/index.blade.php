@@ -10,13 +10,11 @@
         <ul class="list-group borderless">
             <li class="list-group-item border-0"><a href="{{ route('admin.feedbacks') }}">Feedbacks</a></li>
             <li class="list-group-item border-0"><a href="{{ route('admin.articles') }}">Articles</a></li>
+            <li class="list-group-item border-0"><a href="{{ route('admin.tidings') }}">News</a></li>
+            <li class="list-group-item border-0"><a href="{{ route('tidings.create') }}">Create news</a></li>
         </ul>
         <br>
         <br>
-        <nav class="blog-pagination">
-            <a class="btn btn-outline-primary" href="#">Older</a>
-            <a class="btn btn-outline-secondary disabled" href="#">Newer</a>
-        </nav>
 
     </div>
 @endsection

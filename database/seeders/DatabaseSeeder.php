@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Article;
+use App\Models\Tiding;
 use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -17,6 +18,10 @@ class DatabaseSeeder extends Seeder
             ->create()
             ->each(function (User $user) {
                 $user->articles()->saveMany(Article::factory()
+                    ->count(10)
+                    ->make());
+            })->each(function (User $user) {
+                $user->articles()->saveMany(Tiding::factory()
                     ->count(10)
                     ->make());
             });
