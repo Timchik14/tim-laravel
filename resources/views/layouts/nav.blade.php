@@ -50,6 +50,7 @@
             <a class="p-2 text-muted" href="{{ route('tidings.index') }}">Новости</a>
             <a class="p-2 text-muted" href="{{ route('about') }}">О нас</a>
             <a class="p-2 text-muted" href="{{ route('contacts') }}">Контакты</a>
+            <a class="p-2 text-muted" href="{{ route('statistics') }}">Статистика</a>
             @admin
                 <a class="p-2 text-muted" href="{{ route('admin') }}">Административный раздел</a>
                 <a class="p-2 text-muted" href="{{ route('tidings.create') }}">Создать новость</a>

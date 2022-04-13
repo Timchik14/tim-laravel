@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Article extends Model
+class Article extends Model implements Taggable
 {
     use HasFactory;
     use SoftDeletes;

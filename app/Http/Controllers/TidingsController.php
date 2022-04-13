@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TidingRequest;
+use App\Models\Comment;
 use App\Models\Tiding;
 use App\Services\TagsSynchronizer;
 
@@ -63,5 +64,16 @@ class TidingsController extends Controller
         $tiding->delete();
 
         return redirect(route('tidings.index'))->with('status', 'Tiding deleted!');
+    }
+
+    public function comment(Tiding $tiding)
+    {
+        $validated = $this->validate(request(), [
+            'text' => 'required',
+        ]);
+        $validated['user_id'] = auth()->id();
+        $comment = new Comment($validated);
+        $tiding->comments()->save($comment);
+        return back()->with('status', 'Comment created!');
     }
 }
