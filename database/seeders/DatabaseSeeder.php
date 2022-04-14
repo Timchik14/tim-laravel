@@ -28,5 +28,8 @@ class DatabaseSeeder extends Seeder
         Article::all()->each(function (Article $article) {
             $article->tags()->attach(Tag::all()->random(3));
         });
+        Tiding::all()->each(function (Tiding $tiding) {
+            $tiding->tags()->attach(Tag::all()->random(3));
+        });
     }
 }

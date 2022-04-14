@@ -3,5 +3,4 @@
         <h4 class="font-italic">Облако тегов</h4>
         @include('articles.tags', ['tags' => $tagsCloud])
     </div>
-
 </aside>

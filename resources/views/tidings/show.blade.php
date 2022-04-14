@@ -23,7 +23,16 @@
             <hr>
             <p>{{ $tiding->body }}</p>
             <hr>
-
+                <p>Комментарии</p>
+                @auth()
+                    @include('layouts.errors')
+                    @include('tidings.comment-create')
+                @endauth
+                <br>
+                @foreach($tiding->comments as $comment)
+                    @include('comments.comment')
+                @endforeach
+            <hr>
         </div>
     </div>
 @endsection

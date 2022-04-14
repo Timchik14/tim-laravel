@@ -8,6 +8,7 @@ use App\Http\Controllers\MainPageController;
 use App\Http\Controllers\AdminsArticlesController;
 use App\Http\Controllers\TidingsController;
 use App\Http\Controllers\AdminsTidingsController;
+use App\Http\Controllers\StatisticsController;
 
 Route::get('/articles/tags/{tag}', [TagsController::class, 'index'])->name('tags');
 Route::get('/about', [ArticlesController::class, 'about'])->name('about');
@@ -23,7 +24,8 @@ Route::get('/admin/feedbacks', [FeedbacksController::class, 'show'])
     ->name('admin.feedbacks')
     ->middleware('admin');
 
-Route::post('/comments/{article}/', [ArticlesController::class, 'comment'])->name('comments');
+Route::post('/comments/{article}/', [ArticlesController::class, 'comment'])->name('article.comments');
+Route::post('/comments/{tiding}/', [TidingsController::class, 'comment'])->name('tiding.comments');
 
 Route::get('/admin', [AdminsArticlesController::class, 'index'])->name('admin');
 
@@ -34,5 +36,7 @@ Route::get('/admin/articles/{article}/edit', [AdminsArticlesController::class, '
 Route::get('/admin/tidings', [AdminsTidingsController::class, 'showTidings'])->name('admin.tidings');
 Route::get('/admin/tidings/{tiding}/', [AdminsTidingsController::class, 'show'])->name('admin.tiding');
 Route::get('/admin/tidings/{tiding}/edit', [AdminsTidingsController::class, 'edit'])->name('admin.tiding.edit');
+
+Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
 
 Auth::routes();

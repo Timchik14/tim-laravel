@@ -10,7 +10,12 @@ class Tag extends Model
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
+        return $this->morphedByMany(Article::class, 'taggable');
+    }
+
+    public function tidings()
+    {
+        return $this->morphedByMany(Tiding::class, 'taggable');
     }
 
     public function getRouteKeyName()
@@ -20,6 +25,6 @@ class Tag extends Model
 
     public static function tagsCLoud()
     {
-        return (new static)->has('articles')->get();
+        return (new static)->all();
     }
 }

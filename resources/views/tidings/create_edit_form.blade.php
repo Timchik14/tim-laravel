@@ -20,8 +20,15 @@
     <label for="body" class="form-label">Текст статьи</label>
     <textarea class="form-control" id="body" name="body" value="">{{ old('body', $tiding->body) }}</textarea>
 </div>
+
+<div class="mb-3">
+    <label for="body" class="form-label">Теги</label>
+    <input type="text" class="form-control" id="tags" name="tags" value="{{ old('tags', $tiding->tags->pluck('name')->implode(',')) }}">
+</div>
+
 <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="published" name="published" {{ $tiding->created_at ? 'checked' : '' }}>
     <label class="form-check-label" for="published">Опубликовать</label>
 </div>
+
 <button type="submit" class="btn btn-primary">Принять</button>

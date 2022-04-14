@@ -85,12 +85,12 @@ class ArticlesController extends Controller
 
     public function comment(Article $article)
     {
-        $comment = $this->validate(request(), [
+        $validated = $this->validate(request(), [
             'text' => 'required',
         ]);
-        $comment['user_id'] = auth()->id();
-        $comment['article_id'] = $article->id;
-        Comment::create($comment);
+        $validated['user_id'] = auth()->id();
+        $comment = new Comment($validated);
+        $article->comments()->save($comment);
         return back()->with('status', 'Comment created!');
     }
 

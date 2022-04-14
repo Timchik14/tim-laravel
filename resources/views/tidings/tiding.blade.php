@@ -4,6 +4,8 @@
     </a>
     <p class="blog-post-meta">{{ $tiding->created_at ? $tiding->created_at->toFormattedDateString() : 'Not published' }}</p>
 
+    @include('articles.tags', ['tags' => $tiding->tags])
+
     <hr>
     <p>{{ $tiding->short_description }}</p>
     <hr>
