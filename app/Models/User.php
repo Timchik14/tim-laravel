@@ -31,6 +31,11 @@ class User extends Authenticatable
         return $this->hasMany(Article::class, 'owner_id');
     }
 
+    public function tidings()
+    {
+        return $this->hasMany(Tiding::class, 'owner_id');
+    }
+
     // return user to role relations
     public function roles()
     {
