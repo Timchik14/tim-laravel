@@ -12,6 +12,7 @@
             <li class="list-group-item border-0"><a href="{{ route('admin.articles') }}">Articles</a></li>
             <li class="list-group-item border-0"><a href="{{ route('admin.tidings') }}">News</a></li>
             <li class="list-group-item border-0"><a href="{{ route('tidings.create') }}">Create news</a></li>
+            <li class="list-group-item border-0"><a href="{{ route('reports') }}">Reports</a></li>
         </ul>
         <br>
         <br>

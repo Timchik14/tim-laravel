@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminsArticlesController;
 use App\Http\Controllers\TidingsController;
 use App\Http\Controllers\AdminsTidingsController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\ReportsController;
 
 Route::get('/articles/tags/{tag}', [TagsController::class, 'index'])->name('tags');
 Route::get('/about', [ArticlesController::class, 'about'])->name('about');
@@ -38,5 +39,9 @@ Route::get('/admin/tidings/{tiding}/', [AdminsTidingsController::class, 'show'])
 Route::get('/admin/tidings/{tiding}/edit', [AdminsTidingsController::class, 'edit'])->name('admin.tiding.edit');
 
 Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
+
+Route::get('/reports', [ReportsController::class, 'index'])->name('reports');
+Route::get('/reports/total', [ReportsController::class, 'total'])->name('reports.total');
+Route::get('/reports/total/send', [ReportsController::class, 'create'])->name('reports.send');
 
 Auth::routes();
