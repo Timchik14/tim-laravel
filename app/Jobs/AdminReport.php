@@ -15,6 +15,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Http\Request;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AdminReport implements ShouldQueue
@@ -24,7 +25,7 @@ class AdminReport implements ShouldQueue
     public $request;
     protected $user;
 
-    public function __construct($request = null, User $user)
+    public function __construct($request, User $user)
     {
         $this->request = $request;
         $this->user = $user;
@@ -34,22 +35,24 @@ class AdminReport implements ShouldQueue
     {
         $report = '';
 
-        foreach ($this->request as $item) {
+        $request = array_values($this->request['requested']);
+
+        foreach ($request as $item) {
             switch ($item) {
                 case 'news':
-                    $report .= 'News: ' . Tiding::all()->count() . PHP_EOL;
+                    $report .= 'News: ' . DB::table('tidings')->count() . PHP_EOL;
                     break;
                 case 'articles':
-                    $report .= 'Articles: ' . Article::all()->count() . PHP_EOL;
+                    $report .= 'Articles: ' . DB::table('articles')->count() . PHP_EOL;
                     break;
                 case 'comments':
-                    $report .= 'Comments: ' . Comment::all()->count() . PHP_EOL;
+                    $report .= 'Comments: ' . DB::table('comments')->count() . PHP_EOL;
                     break;
                 case 'tags':
-                    $report .= 'Tags: ' . Tag::all()->count() . PHP_EOL;
+                    $report .= 'Tags: ' . DB::table('tags')->count() . PHP_EOL;
                     break;
                 case 'users':
-                    $report .= 'Users: ' . User::all()->count() . PHP_EOL;
+                    $report .= 'Users: ' . DB::table('users')->count() . PHP_EOL;
                     break;
             }
         }

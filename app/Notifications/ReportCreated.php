@@ -11,7 +11,7 @@ class ReportCreated extends Notification
 {
     use Queueable;
 
-    protected $report;
+    public $report;
 
     public function __construct($report)
     {
