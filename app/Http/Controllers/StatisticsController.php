@@ -10,10 +10,10 @@ class StatisticsController extends Controller
 {
     public function index()
     {
-        $newsCount = Tiding::all()->count();
+        $newsCount = Tiding::count();
 
-        $articlesCount = Article::all()->count();
-        
+        $articlesCount = Article::count();
+
         $mostActiveAuthor = User::withCount('articles')
             ->orderByDesc('articles_count')
             ->first();
@@ -41,7 +41,7 @@ class StatisticsController extends Controller
             ->orderByDesc('comments_count')
             ->first();
 
-        return view('statistics.index',compact([
+        return view('statistics.index', compact([
             'articlesCount',
             'newsCount',
             'longestArticle',
