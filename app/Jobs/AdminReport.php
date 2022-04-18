@@ -40,19 +40,19 @@ class AdminReport implements ShouldQueue
         foreach ($request as $item) {
             switch ($item) {
                 case 'news':
-                    $report .= 'News: ' . DB::table('tidings')->count() . PHP_EOL;
+                    $report .= 'News: ' . Tiding::count() . PHP_EOL;
                     break;
                 case 'articles':
-                    $report .= 'Articles: ' . DB::table('articles')->count() . PHP_EOL;
+                    $report .= 'Articles: ' . Article::count() . PHP_EOL;
                     break;
                 case 'comments':
-                    $report .= 'Comments: ' . DB::table('comments')->count() . PHP_EOL;
+                    $report .= 'Comments: ' . Comment::count() . PHP_EOL;
                     break;
                 case 'tags':
-                    $report .= 'Tags: ' . DB::table('tags')->count() . PHP_EOL;
+                    $report .= 'Tags: ' . Tag::count() . PHP_EOL;
                     break;
                 case 'users':
-                    $report .= 'Users: ' . DB::table('users')->count() . PHP_EOL;
+                    $report .= 'Users: ' . User::count() . PHP_EOL;
                     break;
             }
         }

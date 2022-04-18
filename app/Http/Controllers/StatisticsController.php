@@ -10,9 +10,9 @@ class StatisticsController extends Controller
 {
     public function index()
     {
-        $newsCount = Tiding::all()->count();
+        $newsCount = Tiding::count();
 
-        $articlesCount = Article::all()->count();
+        $articlesCount = Article::count();
 
         $mostActiveAuthor = User::withCount('articles')
             ->orderByDesc('articles_count')
